@@ -3,7 +3,6 @@ package Practical4;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
 public class Main {
     // готовое поле
     public static int[][] map() {
@@ -32,7 +31,7 @@ public class Main {
                     newArr[i][j] = "#"; // преграда
                 if (arr[i][j] == -2)
                     newArr[i][j] = "@"; // путь
-                if (arr[i][j] == 0)
+                if (arr[i][j] > 0)
                     newArr[i][j] = "-"; // пустое поле
                 if (i == xS && j == yS)
                     newArr[i][j] = "S"; // точка старта
@@ -72,6 +71,7 @@ public class Main {
         return map;
     }
 
+    // поиск пути
     public static int[][] name(int[][] map, int[][] newMap, int xS, int yS, int xF, int yF) {
         int[][] res = map;
         int num = newMap[xF][yF];
@@ -100,7 +100,7 @@ public class Main {
     public static void main(String[] args) {
         int xS = 2; // точка старта
         int yS = 5;
-        int xF = 8; // точка финиша
+        int xF = 9; // точка финиша
         int yF = 9;
 
         int[][] map = map();

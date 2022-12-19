@@ -36,9 +36,9 @@ public class Field {
                 // if (arr[i][j] == "-")
                 //     newArr[i][j] = "-"; // пустое поле
                 if (i == xS && j == yS)
-                    newArr[i][j] = "S"; // точка старта
+                    arr[i][j] = "S"; // точка старта
                 if (i == xF && j == yF)
-                    newArr[i][j] = "F"; // точка финеша
+                    arr[i][j] = "F"; // точка финеша
                 System.out.print(newArr[i][j]);
             }
             System.out.println();
