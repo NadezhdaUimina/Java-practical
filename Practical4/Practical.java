@@ -15,7 +15,7 @@ public class Practical {
                 { -1, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, -1 },
                 { -1, 0, -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, -1 },
                 { -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, -1 },
-                { -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, -1 },
+                { -1, 0, 0, 0, 0, -1, 0, 0, -1, -1, -1, -1, -1 },
                 { -1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1 },
                 { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }
         };
@@ -27,16 +27,18 @@ public class Practical {
         String[][] newArr = new String[arr.length][arr[1].length];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                if (arr[i][j] == -1)
+                if (arr[i][j] == -1) {
                     newArr[i][j] = "#"; // преграда
+                } else {
+                    newArr[i][j] = "-"; // пустое поле
+                }
                 if (arr[i][j] == -2)
                     newArr[i][j] = "@"; // путь
-                if (arr[i][j] > 0)
-                    newArr[i][j] = "-"; // пустое поле
                 if (i == xS && j == yS)
                     newArr[i][j] = "S"; // точка старта
                 if (i == xF && j == yF)
                     newArr[i][j] = "F"; // точка финеша
+
                 System.out.print(newArr[i][j]);
             }
             System.out.println();
@@ -75,24 +77,28 @@ public class Practical {
     public static int[][] searchWay(int[][] map, int[][] newMap, int xS, int yS, int xF, int yF) {
         int[][] res = map;
         int num = newMap[xF][yF];
-        while (num != 1) {
-            if (newMap[xF - 1][yF] == num - 1) {
-                res[xF - 1][yF] = -2;
-                xF--;
+        if (newMap[xF][yF] == 0) {
+            System.out.println("Путь не найден");
+        } else {
+            while (num != 1) {
+                if (newMap[xF - 1][yF] == num - 1) {
+                    res[xF - 1][yF] = -2;
+                    xF--;
+                }
+                if (newMap[xF][yF - 1] == num - 1) {
+                    res[xF][yF - 1] = -2;
+                    yF--;
+                }
+                if (newMap[xF + 1][yF] == num - 1) {
+                    res[xF + 1][yF] = -2;
+                    xF++;
+                }
+                if (newMap[xF][yF + 1] == num - 1) {
+                    res[xF][yF + 1] = -2;
+                    yF++;
+                }
+                num--;
             }
-            if (newMap[xF][yF - 1] == num - 1) {
-                res[xF][yF - 1] = -2;
-                yF--;
-            }
-            if (newMap[xF + 1][yF] == num - 1) {
-                res[xF + 1][yF] = -2;
-                xF++;
-            }
-            if (newMap[xF][yF + 1] == num - 1) {
-                res[xF][yF + 1] = -2;
-                yF++;
-            }
-            num--;
         }
         return res;
     }
@@ -107,5 +113,6 @@ public class Practical {
         int[][] newMap = waveAlgorithm(map, xS, yS, xF, yF);
         int[][] res = searchWay(map, newMap, xS, yS, xF, yF);
         printArr(res, xS, yS, xF, yF);
+
     }
 }
