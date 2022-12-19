@@ -3,7 +3,7 @@ package Practical4;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Main {
+public class Practical {
     // готовое поле
     public static int[][] map() {
         int[][] mapArr = {
@@ -72,7 +72,7 @@ public class Main {
     }
 
     // поиск пути
-    public static int[][] name(int[][] map, int[][] newMap, int xS, int yS, int xF, int yF) {
+    public static int[][] searchWay(int[][] map, int[][] newMap, int xS, int yS, int xF, int yF) {
         int[][] res = map;
         int num = newMap[xF][yF];
         while (num != 1) {
@@ -105,7 +105,7 @@ public class Main {
 
         int[][] map = map();
         int[][] newMap = waveAlgorithm(map, xS, yS, xF, yF);
-        int[][] res = name(map, newMap, xS, yS, xF, yF);
+        int[][] res = searchWay(map, newMap, xS, yS, xF, yF);
         printArr(res, xS, yS, xF, yF);
     }
 }
