@@ -2,13 +2,8 @@ package Practical6;
 
 import java.util.ArrayList;
 
-/**
- * App (клиентский класс)
- */
 public class App {
-  /**
-   * создание экземляра, вывод данных
-   */
+  // создание экземляра, вывод данных
   public static void main(String[] args) {
     Infrastructure infrastructure = new Infrastructure();
 
@@ -23,35 +18,23 @@ public class App {
   }
 }
 
-/**
- * Infrastructure (класс отвечающий за создание приложения)
- */
+// класс отвечающий за создание приложения
 class Infrastructure {
-  /**
-   * запуск создания БД
-   */
+
+  // запуск создания БД
   public Infrastructure() {
     init();
   }
 
   Db db;
 
-  /**
-   * готовая база данных
-   * 
-   * @return база данных
-   */
+  // готовая база данных
   public Db getDb() {
     return db;
   }
 
-  /**
-   * метод вывода всех данных из БД
-   * 
-   * @param idCinema id фильма
-   * @return данные в формате(жанр и компания обращаются к соответствующим
-   *         таблицам)
-   */
+  // метод вывода всех данных из БД, принимает id фильма, возвращает данные в
+  // формате строки(жанр и компания обращаются к соответствующим таблицам)
   public String getAllInfo(int idCinema) {
     Cinema c = db.films.get(idCinema - 1);
 
@@ -62,16 +45,9 @@ class Infrastructure {
         db.prod.get(c.filmProd - 1).titleName);
   }
 
-  /**
-   * метод поиска по входным данным
-   * 
-   * @param searchData входные данные для поска
-   * @return список данных по поиску
-   */
+  // метод поиска по входным данным, возвращает список данных по поиска
   public ArrayList<String> findAll(String searchData) {
-
     ArrayList<String> findAll = new ArrayList<String>();
-
     for (int idCinema = 0; idCinema < db.films.size(); idCinema++) {
       Cinema c = db.films.get(idCinema);
       if (c.name.toLowerCase().contains(searchData.toLowerCase())) {
@@ -88,23 +64,15 @@ class Infrastructure {
     return findAll;
   }
 
-  /**
-   * печать результатов поиска
-   * 
-   * @param findAll список результатов
-   */
+  // печать результатов поиска
   public void printResult(ArrayList<String> findAll) {
     for (int i = 0; i < findAll.size(); i++) {
       System.out.println(findAll.get(i));
     }
   }
 
-  /**
-   * создание БД, наполнение, добавление в БД, добавление жанров, заполнение
-   * компаний
-   * 
-   * @return база данных
-   */
+  // создание БД, наполнение, добавление в БД, добавление жанров, заполнение
+  // компаний
   Db init() {
     db = new Db();
     Cinema c1 = new Cinema(1, "Тьма", 1, 1);
@@ -131,38 +99,27 @@ class Infrastructure {
 
 }
 
-/**
- * Db (база данных, создание списков: фильмы, компания, жанры)
- */
+// база данных, создание списков: фильмы, компания, жанры
 class Db {
   ArrayList<Cinema> films = new ArrayList<>();
   ArrayList<FilmProducer> prod = new ArrayList<>();
   ArrayList<Genre> genres = new ArrayList<>();
 
-  /**
-   * метод добавление компании
-   * 
-   * @param producer
-   */
+  // метод добавление компании
   public void addFilmProducer(FilmProducer producer) {
     prod.add(producer);
   }
 }
 
-/**
- * Cinema (модель фильмов)
- * id, компания, название, жанр
- */
+// создание модели фильмов, id, компания, название, жанр
 class Cinema {
   int id;
   int filmProd;
   String name;
   int genre;
 
-  /**
-   * сгенерированный конструктор(для создания выделяем строки 124-127 ПКМ ->
-   * действие с исходным кодом -> Generate Constructors)
-   */
+  // сгенерированный конструктор(для создания выделяем строки 124-127 ПКМ ->
+  // действие с исходным кодом -> Generate Constructors)
   public Cinema(int id, String name, int genre, int filmProd) {
     this.id = id;
     this.filmProd = filmProd;
@@ -171,44 +128,29 @@ class Cinema {
   }
 }
 
-/**
- * FilmProducer (модель киностудий)
- * id, наименование
- */
+// модель киностудий, id, наименование
 class FilmProducer {
   int id;
   String titleName;
 }
 
-/**
- * Genre (модель жанров)
- * id, жанр
- */
+// модель жанров, id, жанр
 class Genre {
   int id;
   String name;
 
-  /**
-   * сгенерированный конструктор
-   */
+  // сгенерированный конструктор
   public Genre(int id, String name) {
     this.id = id;
     this.name = name;
   }
 }
 
-/**
- * FilmProducerFactory ( таблица с компаниями)
- */
+// таблица с компаниями
 class FilmProducerFactory {
   int count = 1;
 
-  /**
-   * создание компании
-   * 
-   * @param name имя компании
-   * @return имя компании
-   */
+  // создание компании
   public FilmProducer getFilmProducer(String name) {
     FilmProducer fp = new FilmProducer();
     fp.id = count++;
