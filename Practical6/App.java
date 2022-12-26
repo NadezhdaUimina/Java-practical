@@ -206,8 +206,8 @@ class FilmProducerFactory {
   /**
    * создание компании
    * 
-   * @param name
-   * @return
+   * @param name имя компании
+   * @return имя компании
    */
   public FilmProducer getFilmProducer(String name) {
     FilmProducer fp = new FilmProducer();
