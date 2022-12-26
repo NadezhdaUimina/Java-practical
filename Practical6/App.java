@@ -45,7 +45,7 @@ class Infrastructure {
         db.prod.get(c.filmProd - 1).titleName);
   }
 
-  // метод поиска по входным данным, возвращает список данных по поиска
+  // метод поиска по входным данным, возвращает список данных по поиску
   public ArrayList<String> findAll(String searchData) {
     ArrayList<String> findAll = new ArrayList<String>();
     for (int idCinema = 0; idCinema < db.films.size(); idCinema++) {
